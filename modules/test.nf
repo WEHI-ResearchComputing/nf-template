@@ -22,6 +22,7 @@ SPLIT = (System.properties['os.name'] == 'Mac OS X' ? 'gcsplit' : 'csplit')
 
 process SplitSequences {
 
+    publishDir "${params.outdir}", mode: 'copy'
     input:
     path('input.fa')
 
