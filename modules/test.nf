@@ -24,12 +24,12 @@ process SplitSequences {
 
     publishDir "${params.outdir}", mode: 'copy'
     input:
-    path('input.fa')
+    path(file)
 
     output:
     path('seq_*')
     """
-    $SPLIT input.fa '%^>%' '/^>/' '{*}' -f seq_
+    $SPLIT ${file} '%^>%' '/^>/' '{*}' -f seq_
     """
 
 }
