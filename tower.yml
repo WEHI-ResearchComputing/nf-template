@@ -1,5 +1,5 @@
 ## Used to show reports on seqera platform
-## The example below shows how to display multoqc reports and plots in pdf form
+## The example below shows how to display multiqc reports and plots in pdf form
 reports:
   "**/multiqc_report.html": 
     display : "MultiQC report"
