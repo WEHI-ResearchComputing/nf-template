@@ -30,3 +30,19 @@ workflow {
     Test(mapped_input_ch).view()
 
 }
+
+// Print info about the run on completion
+workflow.onComplete {
+    summary = """
+*****************************************************
+*  Workflow execution summary
+*****************************************************
+Duration        : ${workflow.duration}
+Success         : ${workflow.sucess}
+workDir         : ${workflow.workDir}
+Exit status     : ${workflow.exitStatus}
+Output Directory: ${params.outdir}
+*****************************************************
+"""
+    println summary
+}
