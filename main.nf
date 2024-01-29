@@ -11,13 +11,13 @@ println "Input  Directory   : $params.inputdir                   "
 println "Output Directory   : $params.outdir                  " 
 println "*****************************************************"
 
-// include modules
+// Include modules
 include {  Test           } from './modules/test.nf'
 include {  SplitSequences } from './modules/test.nf'
 include {  Reverse        } from './modules/test.nf'
 
 
-//Start main workflow
+// Start main workflow
 workflow {
 
     Channel.fromPath(params.inputdir+"/*.fa",checkIfExists:true).set{input_ch}
