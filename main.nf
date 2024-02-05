@@ -11,13 +11,13 @@ println "Input  Directory   : $params.inputdir                   "
 println "Output Directory   : $params.outdir                  " 
 println "*****************************************************"
 
-// include modules
+// Include modules
 include {  Test           } from './modules/test.nf'
 include {  SplitSequences } from './modules/test.nf'
 include {  Reverse        } from './modules/test.nf'
 
 
-//Start main workflow
+// Start main workflow
 workflow {
 
     Channel.fromPath(params.inputdir+"/*.fa",checkIfExists:true).set{input_ch}
@@ -29,4 +29,20 @@ workflow {
     input_ch.map{ file -> tuple( file.baseName , file)}.set{mapped_input_ch}
     Test(mapped_input_ch).view()
 
+}
+
+// Print info about the run on completion
+workflow.onComplete {
+    summary = """
+*****************************************************
+*  Workflow execution summary
+*****************************************************
+Duration        : ${workflow.duration}
+Success         : ${workflow.sucess}
+workDir         : ${workflow.workDir}
+Exit status     : ${workflow.exitStatus}
+Output Directory: ${params.outdir}
+*****************************************************
+"""
+    println summary
 }
