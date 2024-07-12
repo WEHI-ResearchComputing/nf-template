@@ -25,24 +25,8 @@ workflow {
     split_ch = SplitSequences(input_ch) 
     Reverse(split_ch).view()
 
-
     input_ch.map{ file -> tuple( file.baseName , file)}.set{mapped_input_ch}
     Test(mapped_input_ch).view()
 
 }
 
-// Print info about the run on completion
-workflow.onComplete {
-    summary = """
-*****************************************************
-*  Workflow execution summary
-*****************************************************
-Duration        : ${workflow.duration}
-Success         : ${workflow.sucess}
-workDir         : ${workflow.workDir}
-Exit status     : ${workflow.exitStatus}
-Output Directory: ${params.outdir}
-*****************************************************
-"""
-    println summary
-}
